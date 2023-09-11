@@ -10,7 +10,6 @@ $(document).ready(function() {
 
         if (tabName === 'current') {
             const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
             $.ajax({
                 url: currentWeatherUrl,
                 method: 'GET',
@@ -46,7 +45,12 @@ $(document).ready(function() {
                         const forecast = dailyForecast[day];
                         const date = new Date(forecast.dt * 1000);
                         const dayOfWeek = date.toLocaleDateString('ru-RU', { weekday: 'long' })
-                        forecastTab.append(`<p>${dayOfWeek}: ${forecast.main.temp} °C</p>`);
+                        forecastTab.append('<hr>')
+                        forecastTab.append(`<b>${dayOfWeek}:</b><br> <p>Температура: ${forecast.main.temp} °C`);
+                        forecastTab.append(`<p>Влажность: ${forecast.main.humidity} %</p>`);
+                        forecastTab.append(`<p>Скорость ветра: ${forecast.wind.speed} м/с</p>`);
+                        forecastTab.append(`<p>Давление: ${forecast.main.pressure} hPa</p>`);
+                        forecastTab.append(`<p>Видимость: ${forecast.visibility} м</p>`);
                     }
                 }
             })
